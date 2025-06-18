@@ -53,4 +53,4 @@ class Player(CircleShape):
         
     def speed_boost(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
-        self.position += forward * PLAYER_SPEED_BOOST * dt
+        self.position += forward * PLAYER_SPEED_BOOST * dt      

@@ -8,27 +8,29 @@ from asteroidfield import AsteroidField
 from weapon import Shot
 
 def main():
+    # Initialization
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
 
-    # groups
+    # Sprite groups
     update_group = pygame.sprite.Group()
     draw_group = pygame.sprite.Group()
     asteroid_group = pygame.sprite.Group()
     shots_group = pygame.sprite.Group()
 
-    # containers
+    # Sprite containers
     Player.containers = (update_group, draw_group)
     Asteroid.containers = (asteroid_group, update_group, draw_group)
-    AsteroidField.containers = (update_group)
+    AsteroidField.containers = (update_group,)
     Shot.containers = (shots_group, update_group, draw_group)
 
-    # objects
+    # Game objects
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
 
+    # Main Game loop
     while True:
         # adds exit
         for event in pygame.event.get():
@@ -41,6 +43,8 @@ def main():
         for asteroid in asteroid_group:
             if player.collides(asteroid):
                 print("Game over!")
+                pygame.time.delay(2000)
+                pygame.quit()
                 sys.exit()
             for shot in shots_group:
                 if asteroid.collides(shot):
